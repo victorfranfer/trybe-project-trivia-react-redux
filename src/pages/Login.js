@@ -1,12 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { loginAction } from '../redux/actions';
 
 class Login extends React.Component {
   state = {
     nome: '',
     email: '',
     isDisable: true,
-  };
+  }
 
   handleChange = (target) => {
     const { id, value } = target;
@@ -45,6 +47,13 @@ class Login extends React.Component {
     history.push('/settings');
   };
 
+  submitForm = () => {
+    const { nome, email } = this.state;
+    const { playGame } = this.props;
+    playGame({ nome, email });
+    this.requestTrivia();
+  };
+
   render() {
     const { nome, email, isDisable } = this.state;
 
@@ -79,7 +88,7 @@ class Login extends React.Component {
             type="button"
             data-testid="btn-play"
             disabled={ isDisable }
-            onClick={ () => this.requestTrivia() }
+            onClick={ () => this.submitForm() }
           >
             Play
           </button>
@@ -97,7 +106,14 @@ class Login extends React.Component {
 }
 
 Login.propTypes = {
-  history: PropTypes.string.isRequired,
+  playGame: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
-export default Login;
+const mapDispatchToProps = (dispatch) => ({
+  playGame: (login) => dispatch(loginAction(login)),
+});
+
+export default connect(null, mapDispatchToProps)(Login);
