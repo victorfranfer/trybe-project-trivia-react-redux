@@ -13,6 +13,10 @@ class Game extends React.Component {
     // localStorage.setItem('token', JSON.stringify(token.token));
   };
 
+  componentDidMount() {
+    requestQuestions();
+  }
+
   render() {
     return (
       <main>
