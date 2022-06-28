@@ -36,7 +36,7 @@ class Login extends React.Component {
     );
     const token = await response.json();
     console.log(token.token);
-    localStorage.setItem('token', JSON.stringify(token.token));
+    localStorage.setItem('token', token.token);
     history.push('/game');
   };
 
