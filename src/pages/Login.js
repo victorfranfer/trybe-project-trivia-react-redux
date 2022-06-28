@@ -33,11 +33,19 @@ class Login extends React.Component {
 
   requestTrivia = async () => {
     const { history } = this.props;
-    const response = await fetch('https://opentdb.com/api_token.php?command=request');
+    const response = await fetch(
+      'https://opentdb.com/api_token.php?command=request',
+    );
     const token = await response.json();
+    console.log(token.token);
     localStorage.setItem('token', token.token);
     history.push('/game');
-  }
+  };
+
+  requestPageSettings = () => {
+    const { history } = this.props;
+    history.push('/settings');
+  };
 
   submitForm = () => {
     const { nome, email } = this.state;
@@ -83,6 +91,13 @@ class Login extends React.Component {
             onClick={ () => this.submitForm() }
           >
             Play
+          </button>
+          <button
+            type="button"
+            data-testid="btn-settings"
+            onClick={ () => this.requestPageSettings() }
+          >
+            Configurações
           </button>
         </div>
       </form>
