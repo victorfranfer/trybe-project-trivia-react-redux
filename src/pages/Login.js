@@ -1,10 +1,12 @@
 import React from 'react';
 
+
 class Login extends React.Component {
   state = {
     nome: '',
     email: '',
     isDisable: true,
+    token: '',
   }
 
   handleChange = (target) => {
@@ -27,6 +29,17 @@ class Login extends React.Component {
       });
     }
   };
+
+  requestTrivia = async () => {
+    const response = await fetch('https://opentdb.com/api_token.php?command=request');
+    const token = await response.json();
+    console.log(token.token);
+    this.setState({
+      token,
+    });
+    localStorage.setItem('token', JSON.stringify(token.token));
+    this.props.history.push('/game');
+  }
 
   render() {
     const { nome, email, isDisable } = this.state;
@@ -62,6 +75,7 @@ class Login extends React.Component {
             type="button"
             data-testid="btn-play"
             disabled={ isDisable }
+            onClick={ () => this.requestTrivia() }
           >
             Play
           </button>
