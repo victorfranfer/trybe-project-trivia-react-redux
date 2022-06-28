@@ -1,12 +1,12 @@
 import React from 'react';
-import { history } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class Login extends React.Component {
   state = {
     nome: '',
     email: '',
     isDisable: true,
-  }
+  };
 
   handleChange = (target) => {
     const { id, value } = target;
@@ -30,12 +30,20 @@ class Login extends React.Component {
   };
 
   requestTrivia = async () => {
-    const response = await fetch('https://opentdb.com/api_token.php?command=request');
+    const { history } = this.props;
+    const response = await fetch(
+      'https://opentdb.com/api_token.php?command=request',
+    );
     const token = await response.json();
     console.log(token.token);
     localStorage.setItem('token', JSON.stringify(token.token));
     history.push('/game');
-  }
+  };
+
+  requestPageSettings = () => {
+    const { history } = this.props;
+    history.push('/settings');
+  };
 
   render() {
     const { nome, email, isDisable } = this.state;
@@ -75,10 +83,21 @@ class Login extends React.Component {
           >
             Play
           </button>
+          <button
+            type="button"
+            data-testid="btn-settings"
+            onClick={ () => this.requestPageSettings() }
+          >
+            Configurações
+          </button>
         </div>
       </form>
     );
   }
 }
+
+Login.propTypes = {
+  history: PropTypes.string.isRequired,
+};
 
 export default Login;
