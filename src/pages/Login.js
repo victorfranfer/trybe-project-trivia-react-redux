@@ -1,11 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { loginAction } from '../redux/actions';
 
 class Login extends React.Component {
   state = {
     nome: '',
     email: '',
     isDisable: true,
-    token: '',
   }
 
   handleChange = (target) => {
@@ -30,15 +32,27 @@ class Login extends React.Component {
   };
 
   requestTrivia = async () => {
-    const response = await fetch('https://opentdb.com/api_token.php?command=request');
+    const { history } = this.props;
+    const response = await fetch(
+      'https://opentdb.com/api_token.php?command=request',
+    );
     const token = await response.json();
     console.log(token.token);
-    this.setState({
-      token,
-    });
-    localStorage.setItem('token', JSON.stringify(token.token));
-    this.props.history.push('/game');
-  }
+    localStorage.setItem('token', token.token);
+    history.push('/game');
+  };
+
+  requestPageSettings = () => {
+    const { history } = this.props;
+    history.push('/settings');
+  };
+
+  submitForm = () => {
+    const { nome, email } = this.state;
+    const { playGame } = this.props;
+    playGame({ nome, email });
+    this.requestTrivia();
+  };
 
   render() {
     const { nome, email, isDisable } = this.state;
@@ -74,9 +88,16 @@ class Login extends React.Component {
             type="button"
             data-testid="btn-play"
             disabled={ isDisable }
-            onClick={ () => this.requestTrivia() }
+            onClick={ () => this.submitForm() }
           >
             Play
+          </button>
+          <button
+            type="button"
+            data-testid="btn-settings"
+            onClick={ () => this.requestPageSettings() }
+          >
+            Configurações
           </button>
         </div>
       </form>
@@ -84,4 +105,15 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+Login.propTypes = {
+  playGame: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  playGame: (login) => dispatch(loginAction(login)),
+});
+
+export default connect(null, mapDispatchToProps)(Login);

@@ -1,4 +1,5 @@
 import React from 'react';
+import Header from '../components/Header';
 
 class Game extends React.Component {
 
@@ -20,7 +21,7 @@ class Game extends React.Component {
   render() {
     return (
       <main>
-        <header>Header</header>
+        <Header />
         <h3 data-testid="question-category">category</h3>
         <h6 data-testid="question-text">question</h6>
         <section data-testid="answer-options">
@@ -30,8 +31,5 @@ class Game extends React.Component {
           <button type="submit" data-testid={ `wrong-answer-` }>Option4</button>
         </section>
       </main>
-    );
-  }
-}
 
 export default Game;
