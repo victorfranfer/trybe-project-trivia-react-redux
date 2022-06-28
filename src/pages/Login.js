@@ -1,12 +1,11 @@
 import React from 'react';
-
+import { history } from 'react-router-dom';
 
 class Login extends React.Component {
   state = {
     nome: '',
     email: '',
     isDisable: true,
-    token: '',
   }
 
   handleChange = (target) => {
@@ -34,11 +33,8 @@ class Login extends React.Component {
     const response = await fetch('https://opentdb.com/api_token.php?command=request');
     const token = await response.json();
     console.log(token.token);
-    this.setState({
-      token,
-    });
     localStorage.setItem('token', JSON.stringify(token.token));
-    this.props.history.push('/game');
+    history.push('/game');
   }
 
   render() {
