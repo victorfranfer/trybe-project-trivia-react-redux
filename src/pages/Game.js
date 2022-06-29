@@ -29,17 +29,24 @@ class Game extends React.Component {
     this.requestQuestions();
   }
 
+  teste = () => {
+    const btnCorreto = document.getElementById('btnCorreto');
+    btnCorreto.style.backgroundColor = 'rgb(6, 240, 15)';
+  }
+
   sectionType = () => {
     const { type, correctAnswer, incorrectAnswers } = this.state;
     if (type === 'multiple') {
       return (
         <section data-testid="answer-options">
-          <button type="button" data-testid="correct-answer">
+          <button type="button" data-testid="correct-answer" id="btnCorreto" onClick={ this.teste }>
             { correctAnswer }
           </button>
           <button
-            type="button"
+            id="btnCorreto"
+            type="button1"
             data-testid={ `wrong-answer-${incorrectAnswers[0]}` }
+            onClick={ this.teste }
           >
             { incorrectAnswers[0] }
           </button>
