@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
+import Timer from '../components/Timer';
 
 class Game extends React.Component {
   state = {
@@ -99,19 +100,21 @@ class Game extends React.Component {
     const { question0 } = this.state;
     const { correctAnswer } = question0;
     const randomOptions = this.randomizeOptions();
+    const { isDisabled } = this.props;
     // if (type === 'multiple') {
     return (
       <div data-testid="answer-options">
         { randomOptions.map((option, index) => {
           if (option === correctAnswer) {
             return (
-              <button type="button" data-testid="correct-answer">
+              <button type="button" disabled={ isDisabled } data-testid="correct-answer">
                 { correctAnswer }
               </button>
             );
           } return (
             <button
               type="button"
+              disabled={ isDisabled }
               data-testid={ `wrong-answer-${index}` }
               key={ index }
             >
@@ -134,8 +137,9 @@ class Game extends React.Component {
     return (
       <main>
         <Header />
+        <Timer />
         <h3 data-testid="question-category">{ category }</h3>
-        <h6 data-testid="question-text">{ question }</h6>
+        <h4 data-testid="question-text">{ question }</h4>
         { this.sectionType() }
       </main>
     );
@@ -143,6 +147,7 @@ class Game extends React.Component {
 }
 
 Game.propTypes = {
+  isDisabled: PropTypes.bool.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
