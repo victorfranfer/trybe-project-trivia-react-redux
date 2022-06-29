@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Header from '../components/Header';
+import Timer from '../components/Timer';
 
 class Game extends React.Component {
   state = {
@@ -10,7 +12,7 @@ class Game extends React.Component {
     // question3: {},
     // question4: {},
     isLoading: true,
-    CorectColor: '',
+    correctColor: '',
     wrongColor: '',
   }
 
@@ -99,15 +101,16 @@ class Game extends React.Component {
 
   handleColor = () => {
     this.setState({
-      CorectColor: '3px solid rgb(6, 240, 15)',
+      correctColor: '3px solid rgb(6, 240, 15)',
       wrongColor: '3px solid rgb(255, 0, 0)',
     });
   }
 
   sectionType = () => {
-    const { question0, CorectColor, wrongColor } = this.state;
+    const { question0, correctColor, wrongColor } = this.state;
     const { correctAnswer } = question0;
     const randomOptions = this.randomizeOptions();
+    const { disableOptions } = this.props;
     // if (type === 'multiple') {
     return (
       <div data-testid="answer-options">
@@ -116,8 +119,9 @@ class Game extends React.Component {
             return (
               <button
                 type="button"
+                disabled={ disableOptions }
                 data-testid="correct-answer"
-                style={ { border: CorectColor } }
+                style={ { border: correctColor } }
                 onClick={ this.handleColor }
               >
                 { correctAnswer }
@@ -126,6 +130,7 @@ class Game extends React.Component {
           } return (
             <button
               type="button"
+              disabled={ disableOptions }
               data-testid={ `wrong-answer-${index}` }
               key={ index }
               style={ { border: wrongColor } }
@@ -150,8 +155,9 @@ class Game extends React.Component {
     return (
       <main>
         <Header />
+        <Timer />
         <h3 data-testid="question-category">{ category }</h3>
-        <h6 data-testid="question-text">{ question }</h6>
+        <h4 data-testid="question-text">{ question }</h4>
         { this.sectionType() }
       </main>
     );
@@ -159,9 +165,14 @@ class Game extends React.Component {
 }
 
 Game.propTypes = {
+  disableOptions: PropTypes.bool.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
 };
 
-export default Game;
+const mapStateToProps = (state) => ({
+  disableOptions: state.timer.isDisabled,
+});
+
+export default connect(mapStateToProps)(Game);
