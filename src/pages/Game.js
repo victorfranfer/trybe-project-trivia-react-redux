@@ -10,6 +10,8 @@ class Game extends React.Component {
     // question3: {},
     // question4: {},
     isLoading: true,
+    CorectColor: '',
+    wrongColor: '',
   }
 
   requestQuestions = async () => {
@@ -95,8 +97,15 @@ class Game extends React.Component {
     return answersArray;
   }
 
+  handleColor = () => {
+    this.setState({
+      CorectColor: '3px solid rgb(6, 240, 15)',
+      wrongColor: '3px solid rgb(255, 0, 0)',
+    });
+  }
+
   sectionType = () => {
-    const { question0 } = this.state;
+    const { question0, CorectColor, wrongColor } = this.state;
     const { correctAnswer } = question0;
     const randomOptions = this.randomizeOptions();
     // if (type === 'multiple') {
@@ -105,7 +114,12 @@ class Game extends React.Component {
         { randomOptions.map((option, index) => {
           if (option === correctAnswer) {
             return (
-              <button type="button" data-testid="correct-answer">
+              <button
+                type="button"
+                data-testid="correct-answer"
+                style={ { border: CorectColor } }
+                onClick={ this.handleColor }
+              >
                 { correctAnswer }
               </button>
             );
@@ -114,6 +128,8 @@ class Game extends React.Component {
               type="button"
               data-testid={ `wrong-answer-${index}` }
               key={ index }
+              style={ { border: wrongColor } }
+              onClick={ this.handleColor }
             >
               { option }
             </button>
