@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Header from '../components/Header';
 import Timer from '../components/Timer';
 
@@ -11,6 +12,8 @@ class Game extends React.Component {
     // question3: {},
     // question4: {},
     isLoading: true,
+    correctColor: '',
+    wrongColor: '',
   }
 
   requestQuestions = async () => {
@@ -96,27 +99,42 @@ class Game extends React.Component {
     return answersArray;
   }
 
+  handleColor = () => {
+    this.setState({
+      correctColor: '3px solid rgb(6, 240, 15)',
+      wrongColor: '3px solid rgb(255, 0, 0)',
+    });
+  }
+
   sectionType = () => {
-    const { question0 } = this.state;
+    const { question0, correctColor, wrongColor } = this.state;
     const { correctAnswer } = question0;
     const randomOptions = this.randomizeOptions();
-    const { isDisabled } = this.props;
+    const { disableOptions } = this.props;
     // if (type === 'multiple') {
     return (
       <div data-testid="answer-options">
         { randomOptions.map((option, index) => {
           if (option === correctAnswer) {
             return (
-              <button type="button" disabled={ isDisabled } data-testid="correct-answer">
+              <button
+                type="button"
+                disabled={ disableOptions }
+                data-testid="correct-answer"
+                style={ { border: correctColor } }
+                onClick={ this.handleColor }
+              >
                 { correctAnswer }
               </button>
             );
           } return (
             <button
               type="button"
-              disabled={ isDisabled }
+              disabled={ disableOptions }
               data-testid={ `wrong-answer-${index}` }
               key={ index }
+              style={ { border: wrongColor } }
+              onClick={ this.handleColor }
             >
               { option }
             </button>
@@ -147,10 +165,14 @@ class Game extends React.Component {
 }
 
 Game.propTypes = {
-  isDisabled: PropTypes.bool.isRequired,
+  disableOptions: PropTypes.bool.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
 };
 
-export default Game;
+const mapStateToProps = (state) => ({
+  disableOptions: state.timer.isDisabled,
+});
+
+export default connect(mapStateToProps)(Game);

@@ -3,3 +3,7 @@ export const loginAction = (login) => ({
 });
 
 export const scoreAction = () => ({});
+
+export const disableOptions = () => ({
+  type: 'DISABLE_OPTIONS',
+});
