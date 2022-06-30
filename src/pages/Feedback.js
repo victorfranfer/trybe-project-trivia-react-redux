@@ -16,7 +16,6 @@ class Feedback extends React.Component {
 
   render() {
     const { score, assertions } = this.props;
-    console.log(assertions);
     const answerThreshold = 3;
     return (
       <main>
