@@ -11,6 +11,11 @@ const timer = (state = initialState, action) => {
       isDisabled: true,
       secondsLeft: action.seconds,
     };
+  case 'RESET':
+    return {
+      ...state,
+      isDisabled: false,
+    };
   default:
     return state;
   }
