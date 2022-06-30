@@ -11,7 +11,6 @@ class Timer extends React.Component {
   }
 
   componentDidMount = () => {
-    // const { secondsLeft } = this.state;
     const oneSecond = 1000;
     myInterval = setInterval(
       () => this.setState((prevState) => ({ secondsLeft: prevState.secondsLeft - 1 })),
@@ -20,16 +19,16 @@ class Timer extends React.Component {
   }
 
   setStateAfterUpdate = () => {
+    const { secondsLeft } = this.state;
     const { timer } = this.props;
-    timer();
+    timer(secondsLeft);
   }
 
   componentDidUpdate = (prevProps, previousState) => {
+    const { stopTimer } = this.props;
     const { secondsLeft } = previousState;
-    // const oneSecond = 1000;
-    if (secondsLeft === 1) {
+    if (secondsLeft === 1 || stopTimer) {
       clearInterval(myInterval);
-      console.log(secondsLeft);
       this.setStateAfterUpdate();
     }
   }
@@ -52,10 +51,11 @@ class Timer extends React.Component {
 
 Timer.propTypes = {
   timer: PropTypes.func.isRequired,
+  stopTimer: PropTypes.bool.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  timer: () => dispatch(disableOptions()),
+  timer: (seconds) => dispatch(disableOptions(seconds)),
 });
 
 export default connect(null, mapDispatchToProps)(Timer);

@@ -13,6 +13,12 @@ const player = (state = initialState, action) => {
       name: action.login.nome,
       gravatarEmail: action.login.email,
     };
+  case 'UPDATE_SCORE':
+    return {
+      ...state,
+      assertions: state.assertions + 1,
+      score: action.pontos,
+    };
   default:
     return state;
   }
