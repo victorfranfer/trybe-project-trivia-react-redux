@@ -16,24 +16,24 @@ class Game extends React.Component {
     answer: '',
     nextDisable: false,
     reset: false,
-  }
+  };
 
   componentDidMount = () => {
     const { getQuestions } = this.props;
     const token = localStorage.getItem('token');
     getQuestions(token);
-  }
+  };
 
   changeAnswerState = () => {
     this.setState({ answer: '' });
-  }
+  };
 
   componentDidUpdate = () => {
     const { questionIndex, answer } = this.state;
     const { seconds, updateScore, questions } = this.props;
     if (answer === 'correct') {
       const { difficulty } = questions[questionIndex];
-      const points = BASE_POINTS + (seconds * DIFFICULTY_POINTS[difficulty]);
+      const points = BASE_POINTS + seconds * DIFFICULTY_POINTS[difficulty];
       this.changeAnswerState();
       updateScore(points);
     }
@@ -49,19 +49,23 @@ class Game extends React.Component {
       currentIndex -= 1;
 
       [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex], array[currentIndex]];
+        array[randomIndex],
+        array[currentIndex],
+      ];
     }
 
     return array;
-  }
+  };
 
   randomizeOptions = (questions) => {
     const {
-      correct_answer: correctAnswer, incorrect_answers: incorrectAnswers } = questions;
+      correct_answer: correctAnswer,
+      incorrect_answers: incorrectAnswers,
+    } = questions;
     const answersArray = [...incorrectAnswers, correctAnswer];
     this.shuffle(answersArray);
     return answersArray;
-  }
+  };
 
   handleColor = (target) => {
     const { id } = target;
@@ -73,7 +77,7 @@ class Game extends React.Component {
       nextDisable: true,
       reset: false,
     });
-  }
+  };
 
   sectionType = (questions) => {
     const { correctColor, wrongColor } = this.state;
@@ -82,7 +86,7 @@ class Game extends React.Component {
     const { disableOptions } = this.props;
     return (
       <div data-testid="answer-options">
-        { randomOptions.map((option, index) => {
+        {randomOptions.map((option, index) => {
           if (option === correctAnswer) {
             return (
               <button
@@ -94,10 +98,11 @@ class Game extends React.Component {
                 style={ { border: correctColor } }
                 onClick={ (e) => this.handleColor(e.target) }
               >
-                { correctAnswer }
+                {correctAnswer}
               </button>
             );
-          } return (
+          }
+          return (
             <button
               key={ index }
               type="button"
@@ -107,13 +112,13 @@ class Game extends React.Component {
               style={ { border: wrongColor } }
               onClick={ (e) => this.handleColor(e.target) }
             >
-              { option }
+              {option}
             </button>
           );
         })}
       </div>
     );
-  }
+  };
 
   redirectFunction = () => {
     const { history, redirect } = this.props;
@@ -137,34 +142,33 @@ class Game extends React.Component {
       this.setState({ answer: '' });
       history.push('/feedback');
     }
-  }
+  };
 
   render() {
     const { questionIndex, stopTimer, nextDisable, reset } = this.state;
     const { questions, isLoading } = this.props;
     this.redirectFunction();
-    if (isLoading) return (<div>carregando...</div>);
+    if (isLoading) return <div>carregando...</div>;
     const { category, question } = questions[questionIndex];
     return (
       <main>
         <Header />
         <Timer stopTimer={ stopTimer } reset={ reset } />
-        <h3 data-testid="question-category">{ category }</h3>
-        <h4 data-testid="question-text">{ question }</h4>
-        { this.sectionType(questions[questionIndex]) }
-        {
-          nextDisable
-            && (
-              <div>
-                <button
-                  type="button"
-                  data-testid="btn-next"
-                  onClick={ () => this.nextQuestion() }
-                >
-                  Next
-                </button>
-              </div>)
-        }
+        <h3 data-testid="question-category">{category}</h3>
+        <h4 data-testid="question-text">{question}</h4>
+        {this.sectionType(questions[questionIndex])}
+        {nextDisable && (
+          <div>
+            <button
+              type="button"
+              data-testid="btn-next"
+              onClick={ () => this.nextQuestion() }
+            >
+              Next
+            </button>
+          </div>
+        )}
+
       </main>
     );
   }
@@ -175,13 +179,15 @@ Game.propTypes = {
   seconds: PropTypes.number.isRequired,
   updateScore: PropTypes.func.isRequired,
   getQuestions: PropTypes.func.isRequired,
-  questions: PropTypes.arrayOf(PropTypes.shape({
-    category: PropTypes.string.isRequired,
-    question: PropTypes.string.isRequired,
-    correct_answer: PropTypes.string.isRequired,
-    incorrect_answers: PropTypes.arrayOf(PropTypes.string).isRequired,
-    difficulty: PropTypes.string.isRequired,
-  })).isRequired,
+  questions: PropTypes.arrayOf(
+    PropTypes.shape({
+      category: PropTypes.string.isRequired,
+      question: PropTypes.string.isRequired,
+      correct_answer: PropTypes.string.isRequired,
+      incorrect_answers: PropTypes.arrayOf(PropTypes.string).isRequired,
+      difficulty: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
   redirect: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,
   history: PropTypes.shape({
