@@ -4,6 +4,11 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 
 class Feedback extends React.Component {
+  requestPageSettings = () => {
+    const { history } = this.props;
+    history.push('/');
+  };
+
   render() {
     const { score, assertions } = this.props;
     const answerThreshold = 3;
@@ -17,6 +22,13 @@ class Feedback extends React.Component {
         <span data-testid="feedback-total-score">{ score }</span>
         <span>Total assertions: </span>
         <span data-testid="feedback-total-question">{ assertions }</span>
+        <button
+          type="button"
+          data-testid="btn-play-again"
+          onClick={ () => this.requestLoginPage() }
+        >
+          Play again
+        </button>
       </main>
     );
   }
@@ -25,6 +37,9 @@ class Feedback extends React.Component {
 Feedback.propTypes = {
   score: PropTypes.number.isRequired,
   assertions: PropTypes.number.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 const mapStateToProps = (state) => ({
