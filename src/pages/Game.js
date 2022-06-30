@@ -24,12 +24,17 @@ class Game extends React.Component {
     getQuestions(token);
   }
 
+  changeAnswerState = () => {
+    this.setState({ answer: '' });
+  }
+
   componentDidUpdate = () => {
     const { questionIndex, answer } = this.state;
     const { seconds, updateScore, questions } = this.props;
     if (answer === 'correct') {
       const { difficulty } = questions[questionIndex];
       const points = BASE_POINTS + (seconds * DIFFICULTY_POINTS[difficulty]);
+      this.changeAnswerState();
       updateScore(points);
     }
   };
