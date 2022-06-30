@@ -1,5 +1,6 @@
 const initialState = {
   isDisabled: false,
+  secondsLeft: 0,
 };
 
 const timer = (state = initialState, action) => {
@@ -8,6 +9,7 @@ const timer = (state = initialState, action) => {
     return {
       ...state,
       isDisabled: true,
+      secondsLeft: action.seconds,
     };
   default:
     return state;

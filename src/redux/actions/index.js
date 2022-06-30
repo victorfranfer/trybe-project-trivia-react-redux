@@ -2,8 +2,10 @@ export const loginAction = (login) => ({
   type: 'LOGIN', login,
 });
 
-export const scoreAction = () => ({});
+export const scoreAction = (pontos) => ({
+  type: 'UPDATE_SCORE', pontos,
+});
 
-export const disableOptions = () => ({
-  type: 'DISABLE_OPTIONS',
+export const disableOptions = (seconds) => ({
+  type: 'DISABLE_OPTIONS', seconds,
 });
