@@ -3,22 +3,117 @@ import App from "../../App"
 import userEvent from "@testing-library/user-event";
 import Game from '../../pages/Game';
 import {renderWithRouterAndRedux} from './renderWithRouterAndRedux'
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import { toBeInTheDocument } from "@testing-library/jest-dom";
 
+const questionsResponse = {
+  response_code: 0,
+  results: [
+    {
+      "category": "Geography",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "The Republic of Malta is the smallest microstate worldwide.",
+      "correct_answer": "False",
+      "incorrect_answers": [
+        "True"
+      ]
+    },
+    {
+      "category": "Science & Nature",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "In quantum physics, which of these theorised sub-atomic particles has yet to be observed?",
+      "correct_answer": "Graviton",
+      "incorrect_answers": [
+        "Z boson",
+        "Tau neutrino",
+        "Gluon"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "Generally, which component of a computer draws the most power?",
+      "correct_answer": "Video Card",
+      "incorrect_answers": [
+        "Hard Drive",
+        "Processor",
+        "Power Supply"
+      ]
+    },
+    {
+      "category": "Entertainment: Video Games",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "What is the most expensive weapon in Counter-Strike: Global Offensive?",
+      "correct_answer": "Scar-20/G3SG1",
+      "incorrect_answers": [
+        "M4A1",
+        "AWP",
+        "R8 Revolver"
+      ]
+    },
+    {
+      "category": "Entertainment: Japanese Anime & Manga",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "Who was the Author of the manga Uzumaki?",
+      "correct_answer": "Junji Ito",
+      "incorrect_answers": [
+        "Noboru Takahashi",
+        "Akira Toriyama",
+        "Masashi Kishimoto",
+      ],
+    },
+  ],
+};
+
+const initialState = {
+  game: {
+    questions: questionsResponse.results,
+    isLoading: true,
+    redirect: false,
+  }
+};
+
+const initialState2 = {
+  game: {
+    questions: questionsResponse.results,
+    isLoading: false,
+    redirect: false,
+  }
+}
+
+const mockFetch = () => {
+  jest.spyOn(global, 'fetch').mockImplementation(() => Promise.resolve({
+    json: () => Promise.resolve(questionsResponse),
+  }))
+}
+
+
+// {
+//   global.fetch = jest.fn(() => Promise.resolve({
+//     json: () => Promise.resolve(initialState.questions),
+//   }))
+// }
 
 describe('teste na página Game', () => {
+  beforeEach(mockFetch);
+  afterEach(() => jest.clearAllMocks());
+
   it('testa se aparece a mensagem /carregando/ antes da requisição da API', () => {
-    const { history, store } = renderWithRouterAndRedux(<Game />)
+    const { history, store } = renderWithRouterAndRedux(<App />, initialState)
+    history.push('/game');
 
     const carregando = screen.getByText(/carregando.../i);
     expect(carregando).toBeInTheDocument();
   });
   
-  it('testa se o componente de Header está sendo renderizado', () => {
-    const { history, store } = renderWithRouterAndRedux(<Game />)
-
-    jest.spyOn(global, 'fetch').mockImplementation(questionsAPIFetch)
+  it('testa se os componentes estão sendo renderizados', async () => {
+    const { history, store } = renderWithRouterAndRedux(<App />, initialState2);
+    history.push('/game');
 
     const playerPicture = screen.getByTestId('header-profile-picture');
     expect(playerPicture).toBeInTheDocument();
@@ -28,17 +123,9 @@ describe('teste na página Game', () => {
 
     const playerScore = screen.getByTestId('header-score');
     expect(playerScore).toBeInTheDocument();
-  });
-
-  it('testa se o componente Timer está sendo renderizado', () => {
-    const { history, store } = renderWithRouterAndRedux(<Game />)
 
     const timer = screen.getByTestId('timer');
     expect(timer).toBeInTheDocument();
-  });
-
-  it('testa se as perguntas estão sendo renderizadas', () => {
-    const { history, store } = renderWithRouterAndRedux(<Game />)
 
     const questionCategory = screen.getByTestId('question-category');
     expect(questionCategory).toBeInTheDocument();
@@ -52,9 +139,9 @@ describe('teste na página Game', () => {
     const correctAnswer = screen.getByTestId('correct-answer');
     expect(correctAnswer).toBeInTheDocument();
 
-    const wrongAnswer0 = screen.getByTestId('wrong-answer-0');
+    const wrongAnswer0 = screen.getByTestId('wrong-answer-1');
     expect(wrongAnswer0).toBeInTheDocument();
-  })
+  });
 
   // it('testa se o componente XXXX está sendo renderizado', () => {
   //   const { history } = renderWithRouterAndRedux(<App />)
