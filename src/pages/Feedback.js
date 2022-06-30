@@ -9,6 +9,11 @@ class Feedback extends React.Component {
     history.push('/');
   };
 
+  requestRankingPage = () => {
+    const { history } = this.props;
+    history.push('/ranking');
+  }
+
   render() {
     const { score, assertions } = this.props;
     const answerThreshold = 3;
@@ -28,6 +33,13 @@ class Feedback extends React.Component {
           onClick={ () => this.requestLoginPage() }
         >
           Play again
+        </button>
+        <button
+          type="button"
+          data-testid="btn-ranking"
+          onClick={ () => this.requestRankingPage() }
+        >
+          Ranking
         </button>
       </main>
     );
