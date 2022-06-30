@@ -15,6 +15,7 @@ class Game extends React.Component {
     stopTimer: false,
     answer: '',
     nextDisable: false,
+    reset: false,
   }
 
   componentDidMount = () => {
@@ -23,10 +24,10 @@ class Game extends React.Component {
     getQuestions(token);
   }
 
-  componentDidUpdate = (prevProps) => {
+  componentDidUpdate = () => {
     const { questionIndex, answer } = this.state;
     const { seconds, updateScore, questions } = this.props;
-    if (answer === 'correct' && prevProps.seconds !== seconds) {
+    if (answer === 'correct') {
       const { difficulty } = questions[questionIndex];
       const points = BASE_POINTS + (seconds * DIFFICULTY_POINTS[difficulty]);
       updateScore(points);
@@ -65,6 +66,7 @@ class Game extends React.Component {
       stopTimer: true,
       answer: id,
       nextDisable: true,
+      reset: false,
     });
   }
 
@@ -113,8 +115,27 @@ class Game extends React.Component {
     if (redirect) history.push('/');
   };
 
+  nextQuestion = () => {
+    const { questionIndex } = this.state;
+    const { history, questions } = this.props;
+    if (questionIndex < questions.length - 1) {
+      this.setState((prevState) => ({
+        questionIndex: prevState.questionIndex + 1,
+        correctColor: '',
+        wrongColor: '',
+        stopTimer: false,
+        answer: '',
+        nextDisable: false,
+        reset: true,
+      }));
+    } else {
+      this.setState({ answer: '' });
+      history.push('/feedback');
+    }
+  }
+
   render() {
-    const { questionIndex, stopTimer, nextDisable } = this.state;
+    const { questionIndex, stopTimer, nextDisable, reset } = this.state;
     const { questions, isLoading } = this.props;
     this.redirectFunction();
     if (isLoading) return (<div>carregando...</div>);
@@ -122,7 +143,7 @@ class Game extends React.Component {
     return (
       <main>
         <Header />
-        <Timer stopTimer={ stopTimer } />
+        <Timer stopTimer={ stopTimer } reset={ reset } />
         <h3 data-testid="question-category">{ category }</h3>
         <h4 data-testid="question-text">{ question }</h4>
         { this.sectionType(questions[questionIndex]) }
@@ -133,6 +154,7 @@ class Game extends React.Component {
                 <button
                   type="button"
                   data-testid="btn-next"
+                  onClick={ () => this.nextQuestion() }
                 >
                   Next
                 </button>

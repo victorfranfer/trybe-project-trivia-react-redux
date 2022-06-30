@@ -18,6 +18,10 @@ export const redirectAction = () => ({
   type: 'REDIRECT',
 });
 
+export const resetTimerAction = () => ({
+  type: 'RESET',
+});
+
 export function thunkQuestions(token) {
   return async (dispatch) => {
     const response = await fetch(`https://opentdb.com/api.php?amount=5&token=${token}`);
