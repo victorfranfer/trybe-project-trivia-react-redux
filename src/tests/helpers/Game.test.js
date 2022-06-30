@@ -6,6 +6,7 @@ import {renderWithRouterAndRedux} from './renderWithRouterAndRedux'
 import { screen } from '@testing-library/react';
 import { toBeInTheDocument } from "@testing-library/jest-dom";
 
+
 describe('teste na página Game', () => {
   it('testa se aparece a mensagem /carregando/ antes da requisição da API', () => {
     const { history, store } = renderWithRouterAndRedux(<Game />)
@@ -16,6 +17,8 @@ describe('teste na página Game', () => {
   
   it('testa se o componente de Header está sendo renderizado', () => {
     const { history, store } = renderWithRouterAndRedux(<Game />)
+
+    jest.spyOn(global, 'fetch').mockImplementation(questionsAPIFetch)
 
     const playerPicture = screen.getByTestId('header-profile-picture');
     expect(playerPicture).toBeInTheDocument();
