@@ -1,8 +1,9 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 import { renderWithRouterAndRedux } from './helpers/renderWithRouterAndRedux';
+import App from '../App';
 import Feedback from '../pages/Feedback';
-import { screen } from '@testing-library/react';
+import { screen, fireEvent } from '@testing-library/react';
 
 describe('Testes da tela de feedback', () => {
   it('Verifica se possui as informações da pessoa jogadora', () => {
@@ -63,8 +64,33 @@ describe('Testes da tela de feedback', () => {
   })
 
   it('Verifica se possui o botão de jogar novamente', () => {
-    renderWithRouterAndRedux(<Feedback />);
+    const { history } = renderWithRouterAndRedux(<App />);
 
-    const 
+    history.push('/feedback');
+
+    const btnPlayAgain = screen.getByRole('button', {
+      name: /Play Again/i,
+    });
+    expect(btnPlayAgain).toBeInTheDocument();
+
+    userEvent.click(btnPlayAgain);
+
+    const name = screen.getByTestId(/input-player-name/i);
+    expect(name).toBeInTheDocument();
+  })
+
+  it('Verifica se possui o botão de ranking', () => {
+    const { history } = renderWithRouterAndRedux(<App />);
+
+    history.push('/feedback');
+
+    const btnRanking = screen.getByRole('button', {
+      name: /Ranking/i,
+    });
+
+    userEvent.click(btnRanking);
+
+    const title = screen.getByTestId(/ranking-title/i);
+    expect(title).toBeInTheDocument();
   })
 });
