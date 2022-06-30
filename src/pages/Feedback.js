@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 
 class Feedback extends React.Component {
-  requestPageSettings = () => {
+  requestLoginPage = () => {
     const { history } = this.props;
     history.push('/');
   };
@@ -16,12 +16,13 @@ class Feedback extends React.Component {
 
   render() {
     const { score, assertions } = this.props;
+    console.log(assertions);
     const answerThreshold = 3;
     return (
       <main>
         <Header />
         <h3 data-testid="feedback-text">
-          { score < answerThreshold ? 'Could be better...' : 'Well done!' }
+          { assertions < answerThreshold ? 'Could be better...' : 'Well Done!' }
         </h3>
         <span>Total score: </span>
         <span data-testid="feedback-total-score">{ score }</span>
@@ -32,7 +33,7 @@ class Feedback extends React.Component {
           data-testid="btn-play-again"
           onClick={ () => this.requestLoginPage() }
         >
-          Play again
+          Play Again
         </button>
         <button
           type="button"
