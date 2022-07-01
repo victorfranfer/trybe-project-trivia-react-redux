@@ -24,8 +24,6 @@ class Ranking extends React.Component {
   render() {
     const ranking = this.sortedRanking();
 
-    if (ranking.length === 0) return <div>No players</div>;
-
     return (
       <div>
         <div>
