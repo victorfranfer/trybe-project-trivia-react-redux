@@ -83,7 +83,7 @@ const initialState2 = {
     questions: questionsResponse.results,
     isLoading: false,
     redirect: false,
-  }
+  },
 }
 
 const mockFetch = () => {
@@ -104,7 +104,7 @@ describe('teste na página Game', () => {
   afterEach(() => jest.clearAllMocks());
 
   it('testa se aparece a mensagem /carregando/ antes da requisição da API', () => {
-    const { history, store } = renderWithRouterAndRedux(<App />, initialState)
+    const { history } = renderWithRouterAndRedux(<App />, initialState)
     history.push('/game');
 
     const carregando = screen.getByText(/carregando.../i);
@@ -138,10 +138,18 @@ describe('teste na página Game', () => {
 
     const correctAnswer = screen.getByTestId('correct-answer');
     expect(correctAnswer).toBeInTheDocument();
-
-    const wrongAnswer0 = screen.getByTestId('wrong-answer-1');
-    expect(wrongAnswer0).toBeInTheDocument();
   });
+
+  // it('testa se ao clicar numa resposta para o', () => {
+  //   const { history, store } = renderWithRouterAndRedux(<App />, initialState2);
+  //   history.push('/game');
+    
+  //   const correctAnswer = screen.getByRole('button', {id: 'correct'});
+  //   console.log(correctAnswer);
+  //   expect(correctAnswer).toHaveProperty('redirect', false);
+  //   userEvent.click(correctAnswer);
+  //   expect(correctAnswer).toHaveProperty('redirect', true);
+  // })
 
   // it('testa se o componente XXXX está sendo renderizado', () => {
   //   const { history } = renderWithRouterAndRedux(<App />)
