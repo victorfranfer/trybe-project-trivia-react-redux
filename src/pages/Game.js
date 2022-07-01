@@ -39,6 +39,16 @@ class Game extends React.Component {
     }
   };
 
+  componentWillUnmount = () => {
+    this.setState({
+      correctColor: '',
+      wrongColor: '',
+      stopTimer: false,
+      answer: '',
+      nextDisable: false,
+    });
+  }
+
   // source: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
   shuffle = (array) => {
     let currentIndex = array.length;

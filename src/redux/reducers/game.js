@@ -17,6 +17,13 @@ const game = (state = initialState, action) => {
       ...state,
       redirect: true,
     };
+  case 'RESET_ALL':
+    return {
+      ...state,
+      questions: [],
+      isLoading: true,
+      redirect: false,
+    };
   default:
     return state;
   }

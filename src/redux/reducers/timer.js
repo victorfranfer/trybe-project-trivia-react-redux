@@ -16,6 +16,12 @@ const timer = (state = initialState, action) => {
       ...state,
       isDisabled: false,
     };
+  case 'RESET_ALL':
+    return {
+      ...state,
+      isDisabled: false,
+      secondsLeft: 0,
+    };
   default:
     return state;
   }

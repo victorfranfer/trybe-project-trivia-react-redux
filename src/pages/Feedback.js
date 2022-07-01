@@ -1,9 +1,30 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import md5 from 'crypto-js/md5';
 import Header from '../components/Header';
 
 class Feedback extends React.Component {
+  componentDidMount = () => {
+    const { name, score, gravatarEmail } = this.props;
+
+    const gravatar = md5(gravatarEmail).toString();
+
+    const gravatarURL = `https://www.gravatar.com/avatar/${gravatar}`;
+
+    this.updateRanking({
+      name,
+      score,
+      picture: gravatarURL,
+    });
+  }
+
+  updateRanking = (playerRanking) => {
+    const prevRanking = JSON.parse(localStorage.getItem('ranking'));
+    const newRanking = prevRanking ? [...prevRanking, playerRanking] : [playerRanking];
+    localStorage.setItem('ranking', JSON.stringify(newRanking));
+  }
+
   requestLoginPage = () => {
     const { history } = this.props;
     history.push('/');
@@ -47,15 +68,19 @@ class Feedback extends React.Component {
 }
 
 Feedback.propTypes = {
+  name: PropTypes.string.isRequired,
   score: PropTypes.number.isRequired,
   assertions: PropTypes.number.isRequired,
+  gravatarEmail: PropTypes.string.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
 };
 
 const mapStateToProps = (state) => ({
+  name: state.player.name,
   score: state.player.score,
+  gravatarEmail: state.player.gravatarEmail,
   assertions: state.player.assertions,
 });
 
