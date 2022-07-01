@@ -16,6 +16,7 @@ class Game extends React.Component {
     answer: '',
     nextDisable: false,
     reset: false,
+    questionsShuffled: [],
   };
 
   componentDidMount = () => {
@@ -89,14 +90,13 @@ class Game extends React.Component {
     });
   };
 
-  sectionType = (questions) => {
-    const { correctColor, wrongColor } = this.state;
+  questionButtons = (questions) => {
+    const { correctColor, wrongColor, questionsShuffled } = this.state;
     const { correct_answer: correctAnswer } = questions;
-    const randomOptions = this.randomizeOptions(questions);
     const { disableOptions } = this.props;
     return (
       <div data-testid="answer-options">
-        {randomOptions.map((option, index) => {
+        {questionsShuffled.map((option, index) => {
           if (option === correctAnswer) {
             return (
               <button
@@ -128,6 +128,17 @@ class Game extends React.Component {
         })}
       </div>
     );
+  }
+
+  sectionType = (questions) => {
+    const { questionsShuffled } = this.state;
+    if (questionsShuffled.length === 0) {
+      const randomOptions = this.randomizeOptions(questions);
+      this.setState({
+        questionsShuffled: randomOptions,
+      });
+    }
+    return this.questionButtons(questions);
   };
 
   redirectFunction = () => {
@@ -147,6 +158,7 @@ class Game extends React.Component {
         answer: '',
         nextDisable: false,
         reset: true,
+        questionsShuffled: [],
       }));
     } else {
       this.setState({ answer: '' });
