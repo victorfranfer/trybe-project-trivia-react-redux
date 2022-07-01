@@ -19,6 +19,14 @@ const player = (state = initialState, action) => {
       assertions: state.assertions + 1,
       score: state.score + action.pontos,
     };
+  case 'RESET_ALL':
+    return {
+      ...state,
+      name: '',
+      assertions: 0,
+      score: 0,
+      gravatarEmail: '',
+    };
   default:
     return state;
   }

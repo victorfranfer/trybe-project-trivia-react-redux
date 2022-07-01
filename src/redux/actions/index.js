@@ -22,6 +22,10 @@ export const resetTimerAction = () => ({
   type: 'RESET',
 });
 
+export const resetAction = () => ({
+  type: 'RESET_ALL',
+});
+
 export function thunkQuestions(token) {
   return async (dispatch) => {
     const response = await fetch(`https://opentdb.com/api.php?amount=5&token=${token}`);

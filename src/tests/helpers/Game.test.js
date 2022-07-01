@@ -92,13 +92,6 @@ const mockFetch = () => {
   }))
 }
 
-
-// {
-//   global.fetch = jest.fn(() => Promise.resolve({
-//     json: () => Promise.resolve(initialState.questions),
-//   }))
-// }
-
 describe('teste na página Game', () => {
   beforeEach(mockFetch);
   afterEach(() => jest.clearAllMocks());
@@ -138,6 +131,22 @@ describe('teste na página Game', () => {
 
     const correctAnswer = screen.getByTestId('correct-answer');
     expect(correctAnswer).toBeInTheDocument();
+
+    const incorrectAnswers = document.getElementById('wrong');
+    // const incorrectAnswers = screen.getByRole('button', {
+    //   name: /true/i,
+    // });
+    expect(incorrectAnswers).toBeInTheDocument();
+
+    userEvent.click(correctAnswer);
+
+    expect(playerScore).toHaveTextContent('10');
+    
+    const btnNext = screen.getByTestId('btn-next');
+    expect(btnNext).toBeInTheDocument();
+
+    userEvent.click(btnNext);
+    expect(questionText).toHaveTextContent('In quantum physics, which of these theorised sub-atomic particles has yet to be observed?');
   });
 
   // it('testa se ao clicar numa resposta para o', () => {
