@@ -149,43 +149,74 @@ describe('teste na página Game', () => {
     expect(questionText).toHaveTextContent('In quantum physics, which of these theorised sub-atomic particles has yet to be observed?');
   });
 
-  // it('testa se ao clicar numa resposta para o', () => {
-  //   const { history, store } = renderWithRouterAndRedux(<App />, initialState2);
-  //   history.push('/game');
+  it('teste o botão de resposta errada', () => {
+    const { history, store } = renderWithRouterAndRedux(<App />, initialState2);
+    history.push('/game');
+
+    const playerPicture = screen.getByTestId('header-profile-picture');
     
-  //   const correctAnswer = screen.getByRole('button', {id: 'correct'});
-  //   console.log(correctAnswer);
-  //   expect(correctAnswer).toHaveProperty('redirect', false);
-  //   userEvent.click(correctAnswer);
-  //   expect(correctAnswer).toHaveProperty('redirect', true);
-  // })
+    const playerName = screen.getByTestId('header-player-name');
 
-  // it('testa se o componente XXXX está sendo renderizado', () => {
-  //   const { history } = renderWithRouterAndRedux(<App />)
+    const playerScore = screen.getByTestId('header-score');
 
+    const timer = screen.getByTestId('timer');
 
-  //   const nameInput = screen.getByRole('textbox', { name: /nome/i });
-    
+    const questionCategory = screen.getByTestId('question-category');
 
-  //   const email = screen.getByRole('textbox', { name: /email/i });
-  //   expect(email).toBeInTheDocument();
+    const questionText = screen.getByTestId('question-text');
 
-  //   const btnPlay = screen.getByRole('button', { name: /Play/i });
-  //   expect(btnPlay).toHaveProperty('disabled', true);
+    const answerOptions = screen.getByTestId('answer-options');
 
-  //   userEvent.type(email, 'teste@gmail.com')
+    const correctAnswer = screen.getByTestId('correct-answer');
 
-  //   expect(btnPlay).toHaveProperty('disabled', true);
-  //   userEvent.type(nameInput, '123')
+    const incorrectAnswers = document.getElementById('wrong');
+    // const incorrectAnswers = screen.getByRole('button', {
+    //   name: /true/i,
+    // });
+    expect(incorrectAnswers).toBeInTheDocument();
 
-  //   expect(btnPlay).toHaveProperty('disabled', false);
-  //   const btnConfig = screen.getByRole('button', { name: /configurações/i });
-  //   expect(btnConfig).toBeInTheDocument();
-  //   userEvent.click(btnConfig);
-    
-  //   const textId = screen.getByText(/configurações/i);
-  //   expect(textId).toBeInTheDocument();
-  //  // const storageData = jest.spyOn(global.localStorage, 'setItem')
-  //   //expect(storageData).toHaveBeenCalledTimes(1);
-  // });
+    userEvent.click(incorrectAnswers);
+
+    expect(playerScore).toHaveTextContent('0');
+  });
+
+  it('', () => {
+    const { history, store } = renderWithRouterAndRedux(<App />, initialState2);
+    history.push('/game');
+
+    const playerPicture = screen.getByTestId('header-profile-picture');
+    const playerName = screen.getByTestId('header-player-name');
+    const playerScore = screen.getByTestId('header-score');
+    const timer = screen.getByTestId('timer');
+    const questionCategory = screen.getByTestId('question-category');
+    const questionText = screen.getByTestId('question-text');
+    const answerOptions = screen.getByTestId('answer-options');
+    const correctAnswer = screen.getByTestId('correct-answer');
+    const incorrectAnswers = document.getElementById('wrong');
+
+    userEvent.click(correctAnswer);
+
+    const btnNext = screen.getByTestId('btn-next');
+    expect(btnNext).toBeInTheDocument();
+
+    userEvent.click(btnNext);
+    userEvent.click(correctAnswer);
+    const btnNext2 = screen.getByTestId('btn-next');
+    userEvent.click(btnNext2);
+    userEvent.click(correctAnswer);
+    const btnNext3 = screen.getByTestId('btn-next');
+    userEvent.click(btnNext3);
+    userEvent.click(correctAnswer);
+    const btnNext4 = screen.getByTestId('btn-next');
+    userEvent.click(btnNext4);
+    userEvent.click(correctAnswer);
+    const btnNext5 = screen.getByTestId('btn-next');
+    userEvent.click(btnNext5);
+
+    expect(history.location.pathname).toBe('/feedback');
+
+    const btnPlayAgains = screen.getByTestId(/btn-play-again/i);
+    expect(btnPlayAgains).toBeInTheDocument();
+
+  })
 }) ;
