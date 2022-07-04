@@ -72,10 +72,10 @@ body {
   background-color: #282c34;
   color: white;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 }
 
-.player-header img {
+.player-header img, .Player-ranking img {
   padding: 5px;
   border-radius: 50%;
   max-width: 50px;
@@ -86,4 +86,16 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.player-score {
+  padding: 5px;
+}
+
+.answer-container button {
+  margin: 5px;
+}
+
+.Feedback-container button {
+  margin: 10px;
 }

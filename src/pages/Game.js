@@ -166,6 +166,14 @@ class Game extends React.Component {
     }
   };
 
+  // Post de Jessy Damasceno da Turma 21A
+  // source:https://trybecourse.slack.com/archives/C03229WPQDA/p1656603304324169
+  decodeEntity = (inputStr) => {
+    const textarea = document.createElement('textarea');
+    textarea.innerHTML = inputStr;
+    return textarea.value;
+  }
+
   render() {
     const { questionIndex, stopTimer, nextDisable, reset } = this.state;
     const { questions, isLoading } = this.props;
@@ -177,7 +185,7 @@ class Game extends React.Component {
         <Header />
         <Timer stopTimer={ stopTimer } reset={ reset } />
         <h3 data-testid="question-category">{category}</h3>
-        <h4 data-testid="question-text">{question}</h4>
+        <h4 data-testid="question-text">{this.decodeEntity(question)}</h4>
         {this.sectionType(questions[questionIndex])}
         {nextDisable && (
           <div>
