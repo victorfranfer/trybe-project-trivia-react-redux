@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { resetAction } from '../redux/actions';
+import './Ranking.css';
 
 class Ranking extends React.Component {
   sairDoJogo = () => {
@@ -36,8 +37,8 @@ class Ranking extends React.Component {
             Sair do Jogo
           </button>
         </div>
-        <div>
-          <ol>
+        <div className="leaderboard">
+          <ol className="ranking-ol">
             { ranking.map((player, index) => (
               <li key={ index } className="Player-ranking">
                 <img src={ player.picture } alt={ player.name } />
