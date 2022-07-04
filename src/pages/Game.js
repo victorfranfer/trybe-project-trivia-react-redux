@@ -184,7 +184,7 @@ class Game extends React.Component {
       <main>
         <Header />
         <Timer stopTimer={ stopTimer } reset={ reset } />
-        <h3 data-testid="question-category">{category}</h3>
+        <h3 data-testid="question-category">{`Categoria - ${category}`}</h3>
         <h4 data-testid="question-text">{this.decodeEntity(question)}</h4>
         {this.sectionType(questions[questionIndex])}
         {nextDisable && (
