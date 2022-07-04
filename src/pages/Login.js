@@ -101,6 +101,7 @@ class Login extends React.Component {
             <div className="footer-1">
               <button
                 type="button"
+                className='btn-settings'
                 data-testid="btn-settings"
                 onClick={ () => this.requestPageSettings() }
               >

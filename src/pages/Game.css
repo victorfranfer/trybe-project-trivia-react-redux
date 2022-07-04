@@ -1,0 +1,26 @@
+body {
+  background-color: #bfc5ce;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.container {
+  align-items: center;
+  display: flexbox;
+  font-size: 25px;
+  justify-content: center;
+  margin: auto;
+  margin-top: 150px;
+}
+
+.container button {
+  background-color: transparent;
+  color: black;
+  font-size: large;
+}
+
+.container button:active {
+  background-color: black;
+  color: white;
+  font-size: large;
+}
