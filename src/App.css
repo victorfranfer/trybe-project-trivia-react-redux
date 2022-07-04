@@ -61,3 +61,41 @@ body {
     transform: translate3d(4px, 0, 0);
   }
 }
+
+.buttons-container {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.player-header {
+  background-color: #282c34;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+}
+
+.player-header img, .Player-ranking img {
+  padding: 5px;
+  border-radius: 50%;
+  max-width: 50px;
+  height: auto;
+}
+
+.player-name, .player-score {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.player-score {
+  padding: 5px;
+}
+
+.answer-container button {
+  margin: 5px;
+}
+
+.Feedback-container button {
+  margin: 10px;
+}

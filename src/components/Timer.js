@@ -56,8 +56,7 @@ class Timer extends React.Component {
 
     return (
       <h2 data-testid="timer">
-        { secondsLeft }
-        segundos
+        { `${secondsLeft} seconds` }
       </h2>
     );
   }

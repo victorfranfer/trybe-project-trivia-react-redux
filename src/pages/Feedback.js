@@ -39,15 +39,17 @@ class Feedback extends React.Component {
     const { score, assertions } = this.props;
     const answerThreshold = 3;
     return (
-      <main>
+      <main className="Feedback-container">
         <Header />
         <h3 data-testid="feedback-text">
           { assertions < answerThreshold ? 'Could be better...' : 'Well Done!' }
         </h3>
-        <span>Total score: </span>
-        <span data-testid="feedback-total-score">{ score }</span>
-        <span>Total assertions: </span>
-        <span data-testid="feedback-total-question">{ assertions }</span>
+        <div data-testid="feedback-total-score">
+          { `Total score: ${score}` }
+        </div>
+        <div data-testid="feedback-total-question">
+          { `Total assertions: ${assertions}` }
+        </div>
         <button
           type="button"
           data-testid="btn-play-again"

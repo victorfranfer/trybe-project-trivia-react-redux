@@ -39,7 +39,7 @@ class Ranking extends React.Component {
         <div>
           <ol>
             { ranking.map((player, index) => (
-              <li key={ index }>
+              <li key={ index } className="Player-ranking">
                 <img src={ player.picture } alt={ player.name } />
                 <span data-testid={ `player-name-${index}` }>
                   { player.name }
