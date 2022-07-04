@@ -16,11 +16,11 @@ class Header extends React.Component {
           alt={ nome }
           data-testid="header-profile-picture"
         />
-        <div className="player-name" data-testid="header-player-name">
-          { `Player: ${nome}` }
-        </div>
         <div className="player-score" data-testid="header-score">
           { `Score: ${score}` }
+        </div>
+        <div className="player-name" data-testid="header-player-name">
+          { `Player: ${nome}` }
         </div>
       </header>
     );

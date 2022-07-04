@@ -108,7 +108,7 @@ class Game extends React.Component {
                 style={ { border: correctColor } }
                 onClick={ (e) => this.handleColor(e.target) }
               >
-                {correctAnswer}
+                {this.decodeEntity(correctAnswer)}
               </button>
             );
           }
@@ -122,7 +122,7 @@ class Game extends React.Component {
               style={ { border: wrongColor } }
               onClick={ (e) => this.handleColor(e.target) }
             >
-              {option}
+              {this.decodeEntity(option)}
             </button>
           );
         })}
