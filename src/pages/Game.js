@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Header from '../components/Header';
 import Timer from '../components/Timer';
 import { scoreAction, thunkQuestions } from '../redux/actions';
+import './Game.css';
 
 const BASE_POINTS = 10;
 const DIFFICULTY_POINTS = { easy: 1, medium: 2, hard: 3 };
@@ -80,6 +81,9 @@ class Game extends React.Component {
 
   handleColor = (target) => {
     const { id } = target;
+    if (id === 'correct') {
+      alert('Parabéns! você acertou a questão.');
+    } else { alert('ERRROU!!!!'); }
     this.setState({
       correctColor: '3px solid rgb(6, 240, 15)',
       wrongColor: '3px solid rgb(255, 0, 0)',

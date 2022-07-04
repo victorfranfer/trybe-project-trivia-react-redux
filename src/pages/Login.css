@@ -13,7 +13,19 @@
   border: none;
   border-bottom: 1px solid #e1e1e1;
   color: white;
+  font-size: 16px;
   margin-top: 30px;
   outline: none;
   padding: 0 5px;
+}
+
+
+.Login-play, .btn-settings {
+  background-color: transparent;
+  color: white;
+}
+
+.Login-play:disabled {
+  cursor: not-allowed;
+  opacity: 0.2;
 }
