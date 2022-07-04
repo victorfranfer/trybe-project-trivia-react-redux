@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { resetAction } from '../redux/actions';
+import './Ranking.css';
 
 class Ranking extends React.Component {
   sairDoJogo = () => {
@@ -25,32 +26,28 @@ class Ranking extends React.Component {
     const ranking = this.sortedRanking();
 
     return (
-      <div>
-        <div>
-          <h1 data-testid="ranking-title">Ranking</h1>
-          <button
-            type="button"
-            data-testid="btn-go-home"
-            onClick={ () => this.sairDoJogo() }
-          >
-            Sair do Jogo
-          </button>
-        </div>
-        <div>
-          <ol>
-            { ranking.map((player, index) => (
-              <li key={ index } className="Player-ranking">
-                <img src={ player.picture } alt={ player.name } />
-                <span data-testid={ `player-name-${index}` }>
-                  { player.name }
-                </span>
-                <span data-testid={ `player-score-${index}` }>
-                  { player.score }
-                </span>
-              </li>
-            )) }
-          </ol>
-        </div>
+      <div className="leaderboard">
+        <h1 data-testid="ranking-title">Ranking</h1>
+        <button
+          type="button"
+          data-testid="btn-go-home"
+          onClick={ () => this.sairDoJogo() }
+        >
+          Play Again
+        </button>
+        <ol className="ranking-ol">
+          { ranking.map((player, index) => (
+            <li key={ index } className="player-ranking">
+              <img src={ player.picture } alt={ player.name } />
+              <span className="ranking-name" data-testid={ `player-name-${index}` }>
+                { player.name }
+              </span>
+              <span className="ranking-score" data-testid={ `player-score-${index}` }>
+                { player.score }
+              </span>
+            </li>
+          )) }
+        </ol>
       </div>
     );
   }

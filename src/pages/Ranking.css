@@ -1,0 +1,236 @@
+.leaderboard {
+  background: linear-gradient(#555, #222);
+  border-radius: 12px;
+  box-shadow: 0 7px 20px #242424;
+  color: white;
+  margin: 20px auto;
+  perspective: 400px;
+  transform-style: preserve-3d;
+  width: 30rem;
+}
+
+.leaderboard h1 {
+  background: linear-gradient(#393939, #373737);
+  border-radius: 10px 10px 0 0;
+  color: #e1e1e1;
+  font-size: 1.5rem;
+  margin: 0;
+  padding: 1rem;
+  text-align: center;
+}
+
+.leaderboard button {
+  background-color: transparent;
+  color: white;
+  font-size: large;
+  margin: 10px;
+}
+
+.leaderboard ol {
+  counter-reset: leaderboard;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  transform-style: preserve-3d;
+}
+
+.leaderboard ol li {
+  box-shadow: 0 0 0.5rem 1px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  font-size: 1.25rem;
+  padding: 1.25rem 0.625rem 1.25rem 1.5rem;
+  position: relative;
+  transform: translateZ(0) scale(1, 1);
+  transform-style: preserve-3d;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.leaderboard ol li:before, .leaderboard ol li:after {
+  background: linear-gradient(#111, #444);
+  content: '';
+  height: 100%;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  transition: 0.2s ease-in-out;
+  width: 100%;
+  z-index: 1;
+}
+
+.leaderboard ol li:before {
+  transform: rotateY(90deg);
+  transform-origin: center left;
+}
+
+.leaderboard ol li:after {
+  transform: rotateY(-90deg);
+  transform-origin: center right;
+}
+
+.ranking-name {
+  background: none;
+  color: white;
+  counter-increment: leaderboard;
+  height: 3rem;
+  left: 0;
+  margin: 0;
+  padding: 1.25rem 0 1rem 6.75rem;
+  position: absolute;
+  top: 0;
+  width: 3rem;
+}
+
+.ranking-name:before {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 1.25rem;
+  color: #ddd;
+  content: counter(leaderboard);
+  font-size: 0.875rem;
+  height: 1.75rem;
+  left: 1.25rem;
+  line-height: 1.75rem;
+  position: absolute;
+  text-align: center;
+  top: 1.25rem;
+  width: 1.25rem;
+}
+
+.leaderboard ol li:nth-child( 1 ) .ranking-name:before {
+  background: rgba(204, 170, 102, 0.8);
+  color: white;
+  font-weight: 700;
+}
+
+.leaderboard ol li:nth-child( 2 ) .ranking-name:before {
+  background: rgba(255, 255, 255, 0.4);
+  color: white;
+  font-weight: 700;
+}
+
+.leaderboard ol li:nth-child( 3 ) .ranking-name:before {
+  background: rgba(0, 0, 0, 0.35);
+  font-weight: 700;
+}
+
+.leaderboard ol li .ranking-score {
+  color: #ddd;
+  display: block;
+  position: relative;
+  text-align: right;
+}
+
+.leaderboard ol li .ranking-score:before {
+  content: 'Score: ';
+}
+
+.leaderboard ol li img {
+  background: #444;
+  border-radius: 50%;
+  bottom: 0;
+  box-shadow: 0 0 2px 0 black;
+  height: 2.5rem;
+  left: 3.5rem;
+  margin: auto 0;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  width: 2.5rem;
+}
+
+.leaderboard ol li:nth-child( 1 ) {
+  background: #606060;
+}
+
+.leaderboard ol li:nth-child( 2 ) {
+  background: #5b5b5b;
+}
+
+.leaderboard ol li:nth-child( 3 ) {
+  background: #565656;
+}
+
+.leaderboard ol li:nth-child( 4 ) {
+  background: #515151;
+}
+
+.leaderboard ol li:nth-child( 5 ) {
+  background: #4c4c4c;
+}
+
+.leaderboard ol li:nth-child( 6 ) {
+  background: #474747;
+}
+
+.leaderboard ol li:nth-child( 7 ) {
+  background: #424242;
+}
+
+.leaderboard ol li:nth-child( 8 ) {
+  background: #3d3d3d;
+}
+
+.leaderboard ol li:nth-child( 9 ) {
+  background: #383838;
+}
+
+.leaderboard ol li:nth-child( 10 ) {
+  background: #333;
+}
+
+.leaderboard ol li:last-child {
+  border-radius: 0 0 10px 10px;
+}
+
+.leaderboard ol li:last-child:before, .leaderboard ol li:last-child:after {
+  border-radius: 0 0 10px 10px;
+}
+
+.leaderboard ol li:hover {
+  transform: translateZ(15px);
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.leaderboard ol li:hover:before, .leaderboard ol li:hover:after {
+  opacity: 1;
+}
+
+.leaderboard ol li:hover:nth-child( 1 ) {
+  box-shadow: 10px 0 -7px rgba(0, 0, 0, 0.1);
+}
+
+.leaderboard ol li:hover:nth-child( 2 ) {
+  box-shadow: 9px 0 -7px rgba(0, 0, 0, 0.1);
+}
+
+.leaderboard ol li:hover:nth-child( 3 ) {
+  box-shadow: 8px 0 -7px rgba(0, 0, 0, 0.1);
+}
+
+.leaderboard ol li:hover:nth-child( 4 ) {
+  box-shadow: 7px 0 -7px rgba(0, 0, 0, 0.1);
+}
+
+.leaderboard ol li:hover:nth-child( 5 ) {
+  box-shadow: 6px 0 -7px rgba(0, 0, 0, 0.1);
+}
+
+.leaderboard ol li:hover:nth-child( 6 ) {
+  box-shadow: -6px 0 -7px rgba(0, 0, 0, 0.1);
+}
+
+.leaderboard ol li:hover:nth-child( 7 ) {
+  box-shadow: -7px 0 -7px rgba(0, 0, 0, 0.1);
+}
+
+.leaderboard ol li:hover:nth-child( 8 ) {
+  box-shadow: -8px 0 -7px rgba(0, 0, 0, 0.1);
+}
+
+.leaderboard ol li:hover:nth-child( 9 ) {
+  box-shadow: -9px 0 -7px rgba(0, 0, 0, 0.1);
+}
+
+.leaderboard ol li:hover:nth-child( 10 ) {
+  box-shadow: -10px 0 -7px rgba(0, 0, 0, 0.1);
+}
