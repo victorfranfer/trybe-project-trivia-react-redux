@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { loginAction } from '../redux/actions';
+import './Login.css';
 import logo from '../trivia.png';
 
 class Login extends React.Component {
@@ -9,7 +10,7 @@ class Login extends React.Component {
     nome: '',
     email: '',
     isDisable: true,
-  }
+  };
 
   handleChange = (target) => {
     const { id, value } = target;
@@ -86,23 +87,26 @@ class Login extends React.Component {
             </label>
           </div>
           <div className="buttons-container">
-            <button
-              type="button"
-              className="Login-play"
-              data-testid="btn-play"
-              disabled={ isDisable }
-              onClick={ () => this.submitForm() }
-            >
-              Play
-            </button>
-            <button
-              type="button"
-              className="Login-config"
-              data-testid="btn-settings"
-              onClick={ () => this.requestPageSettings() }
-            >
-              Configurações
-            </button>
+            <div className="footer">
+              <button
+                type="button"
+                className="Login-play"
+                data-testid="btn-play"
+                disabled={ isDisable }
+                onClick={ () => this.submitForm() }
+              >
+                Play
+              </button>
+            </div>
+            <div className="footer-1">
+              <button
+                type="button"
+                data-testid="btn-settings"
+                onClick={ () => this.requestPageSettings() }
+              >
+                Configurações
+              </button>
+            </div>
           </div>
         </form>
       </div>
