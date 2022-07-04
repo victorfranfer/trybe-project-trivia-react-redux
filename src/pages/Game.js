@@ -95,7 +95,7 @@ class Game extends React.Component {
     const { correct_answer: correctAnswer } = questions;
     const { disableOptions } = this.props;
     return (
-      <div data-testid="answer-options">
+      <div className="answer-container" data-testid="answer-options">
         {questionsShuffled.map((option, index) => {
           if (option === correctAnswer) {
             return (

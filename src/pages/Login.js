@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { loginAction } from '../redux/actions';
+import logo from '../trivia.png';
 
 class Login extends React.Component {
   state = {
@@ -57,49 +58,54 @@ class Login extends React.Component {
     const { nome, email, isDisable } = this.state;
 
     return (
-      <form>
-        <div>
-          <label htmlFor="nome">
-            Nome:
-            <input
-              type="text"
-              id="nome"
-              data-testid="input-player-name"
-              value={ nome }
-              onChange={ (event) => this.handleChange(event.target) }
-            />
-          </label>
-        </div>
-        <div>
-          <label htmlFor="email">
-            Email:
-            <input
-              type="text"
-              id="email"
-              data-testid="input-gravatar-email"
-              value={ email }
-              onChange={ (event) => this.handleChange(event.target) }
-            />
-          </label>
-        </div>
-        <div>
-          <button
-            type="button"
-            data-testid="btn-play"
-            disabled={ isDisable }
-            onClick={ () => this.submitForm() }
-          >
-            Play
-          </button>
-          <button
-            type="button"
-            data-testid="btn-settings"
-            onClick={ () => this.requestPageSettings() }
-          >
-            Configurações
-          </button>
-        </div>
-      </form>
+      <div className="App-header">
+        <img src={ logo } className="App-logo" alt="logo" />
+        <form>
+          <div className="Login-container">
+            <label htmlFor="nome">
+              Nome:
+              <input
+                type="text"
+                id="nome"
+                data-testid="input-player-name"
+                value={ nome }
+                onChange={ (event) => this.handleChange(event.target) }
+              />
+            </label>
+          </div>
+          <div className="Login-container">
+            <label htmlFor="email">
+              Email:
+              <input
+                type="text"
+                id="email"
+                data-testid="input-gravatar-email"
+                value={ email }
+                onChange={ (event) => this.handleChange(event.target) }
+              />
+            </label>
+          </div>
+          <div className="buttons-container">
+            <button
+              type="button"
+              className="Login-play"
+              data-testid="btn-play"
+              disabled={ isDisable }
+              onClick={ () => this.submitForm() }
+            >
+              Play
+            </button>
+            <button
+              type="button"
+              className="Login-config"
+              data-testid="btn-settings"
+              onClick={ () => this.requestPageSettings() }
+            >
+              Configurações
+            </button>
+          </div>
+        </form>
+      </div>
     );
   }
 }
