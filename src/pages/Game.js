@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Header from '../components/Header';
 import Timer from '../components/Timer';
 import { scoreAction, thunkQuestions } from '../redux/actions';
+import './Game.css';
 
 const BASE_POINTS = 10;
 const DIFFICULTY_POINTS = { easy: 1, medium: 2, hard: 3 };
@@ -80,6 +81,9 @@ class Game extends React.Component {
 
   handleColor = (target) => {
     const { id } = target;
+    if (id === 'correct') {
+      alert('Parabéns! você acertou a questão.');
+    } else { alert('ERRROU!!!!'); }
     this.setState({
       correctColor: '3px solid rgb(6, 240, 15)',
       wrongColor: '3px solid rgb(255, 0, 0)',
@@ -183,22 +187,23 @@ class Game extends React.Component {
     return (
       <main>
         <Header />
-        <Timer stopTimer={ stopTimer } reset={ reset } />
-        <h3 data-testid="question-category">{category}</h3>
-        <h4 data-testid="question-text">{this.decodeEntity(question)}</h4>
-        {this.sectionType(questions[questionIndex])}
-        {nextDisable && (
-          <div>
-            <button
-              type="button"
-              data-testid="btn-next"
-              onClick={ () => this.nextQuestion() }
-            >
-              Next
-            </button>
-          </div>
-        )}
-
+        <div className="container">
+          <Timer stopTimer={ stopTimer } reset={ reset } />
+          <h3 data-testid="question-category">{category}</h3>
+          <h4 data-testid="question-text">{this.decodeEntity(question)}</h4>
+          {this.sectionType(questions[questionIndex])}
+          {nextDisable && (
+            <div>
+              <button
+                type="button"
+                data-testid="btn-next"
+                onClick={ () => this.nextQuestion() }
+              >
+                Next
+              </button>
+            </div>
+          )}
+        </div>
       </main>
     );
   }
