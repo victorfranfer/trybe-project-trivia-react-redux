@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import md5 from 'crypto-js/md5';
 import Header from '../components/Header';
+import './Feedback.css';
 
 class Feedback extends React.Component {
   componentDidMount = () => {
@@ -52,6 +53,7 @@ class Feedback extends React.Component {
         </div>
         <button
           type="button"
+          className="feedback-btn"
           data-testid="btn-play-again"
           onClick={ () => this.requestLoginPage() }
         >
@@ -59,6 +61,7 @@ class Feedback extends React.Component {
         </button>
         <button
           type="button"
+          className="feedback-btn"
           data-testid="btn-ranking"
           onClick={ () => this.requestRankingPage() }
         >
