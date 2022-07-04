@@ -37,7 +37,7 @@ class Ranking extends React.Component {
         </button>
         <ol className="ranking-ol">
           { ranking.map((player, index) => (
-            <li key={ index } className="Player-ranking">
+            <li key={ index } className="player-ranking">
               <img src={ player.picture } alt={ player.name } />
               <span className="ranking-name" data-testid={ `player-name-${index}` }>
                 { player.name }
