@@ -1,0 +1,19 @@
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer {
+  height: 40px;
+  width: 100%;
+}
+
+.Login-container input {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #e1e1e1;
+  color: white;
+  margin-top: 30px;
+  outline: none;
+  padding: 0 5px;
+}
