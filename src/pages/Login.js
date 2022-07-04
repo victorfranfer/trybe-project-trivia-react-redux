@@ -2,13 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { loginAction } from '../redux/actions';
+import './Login.css';
 
 class Login extends React.Component {
   state = {
     nome: '',
     email: '',
     isDisable: true,
-  }
+  };
 
   handleChange = (target) => {
     const { id, value } = target;
@@ -57,49 +58,58 @@ class Login extends React.Component {
     const { nome, email, isDisable } = this.state;
 
     return (
-      <form>
-        <div>
-          <label htmlFor="nome">
-            Nome:
-            <input
-              type="text"
-              id="nome"
-              data-testid="input-player-name"
-              value={ nome }
-              onChange={ (event) => this.handleChange(event.target) }
-            />
-          </label>
-        </div>
-        <div>
-          <label htmlFor="email">
-            Email:
-            <input
-              type="text"
-              id="email"
-              data-testid="input-gravatar-email"
-              value={ email }
-              onChange={ (event) => this.handleChange(event.target) }
-            />
-          </label>
-        </div>
-        <div>
-          <button
-            type="button"
-            data-testid="btn-play"
-            disabled={ isDisable }
-            onClick={ () => this.submitForm() }
-          >
-            Play
-          </button>
-          <button
-            type="button"
-            data-testid="btn-settings"
-            onClick={ () => this.requestPageSettings() }
-          >
-            Configurações
-          </button>
-        </div>
-      </form>
+      <id id="login">
+        <form className="card">
+          <div className="card-header">
+            <h2>Login</h2>
+          </div>
+          <div className="card-content">
+            <div className="card-content-area">
+              <label htmlFor="nome">
+                Nome:
+                <input
+                  type="text"
+                  id="nome"
+                  data-testid="input-player-name"
+                  value={ nome }
+                  onChange={ (event) => this.handleChange(event.target) }
+                />
+              </label>
+            </div>
+            <div className="card-content-area">
+              <label htmlFor="email">
+                Email:
+                <input
+                  type="text"
+                  id="email"
+                  data-testid="input-gravatar-email"
+                  value={ email }
+                  onChange={ (event) => this.handleChange(event.target) }
+                />
+              </label>
+            </div>
+          </div>
+          <div className="footer">
+            <button
+              type="button"
+              data-testid="btn-play"
+              disabled={ isDisable }
+              onClick={ () => this.submitForm() }
+            >
+              Play
+            </button>
+            <div className='footer-1'>
+              <button
+                type="button"
+                data-testid="btn-settings"
+                onClick={ () => this.requestPageSettings() }
+              >
+                Configurações
+              </button>
+            </div>
+          </div>
+        </form>
+      </id>
     );
   }
 }
