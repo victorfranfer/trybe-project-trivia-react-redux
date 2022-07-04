@@ -33,7 +33,7 @@ class Ranking extends React.Component {
           data-testid="btn-go-home"
           onClick={ () => this.sairDoJogo() }
         >
-          Sair do Jogo
+          Play Again
         </button>
         <ol className="ranking-ol">
           { ranking.map((player, index) => (
