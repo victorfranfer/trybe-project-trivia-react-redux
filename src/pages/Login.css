@@ -17,3 +17,14 @@
   outline: none;
   padding: 0 5px;
 }
+
+.Login-play, .btn-settings {
+  background-color: transparent;
+  color: white;
+}
+
+.Login-play:disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+}
+
