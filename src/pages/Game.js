@@ -18,6 +18,7 @@ class Game extends React.Component {
     nextDisable: false,
     reset: false,
     questionsShuffled: [],
+    acertou: '',
   };
 
   componentDidMount = () => {
@@ -31,9 +32,10 @@ class Game extends React.Component {
   };
 
   componentDidUpdate = () => {
-    const { questionIndex, answer } = this.state;
+    const { questionIndex, answer, acertou } = this.state;
     const { seconds, updateScore, questions } = this.props;
     if (answer === 'correct') {
+      this.setState({acertou: true})
       const { difficulty } = questions[questionIndex];
       const points = BASE_POINTS + seconds * DIFFICULTY_POINTS[difficulty];
       this.changeAnswerState();
@@ -81,9 +83,6 @@ class Game extends React.Component {
 
   handleColor = (target) => {
     const { id } = target;
-    if (id === 'correct') {
-      alert('Parabéns! você acertou a questão.');
-    } else { alert('ERRROU!!!!'); }
     this.setState({
       correctColor: '3px solid rgb(6, 240, 15)',
       wrongColor: '3px solid rgb(255, 0, 0)',
@@ -179,7 +178,7 @@ class Game extends React.Component {
   }
 
   render() {
-    const { questionIndex, stopTimer, nextDisable, reset } = this.state;
+    const { questionIndex, stopTimer, nextDisable, reset, acertou } = this.state;
     const { questions, isLoading } = this.props;
     this.redirectFunction();
     if (isLoading) return <div>carregando...</div>;
@@ -201,6 +200,7 @@ class Game extends React.Component {
               >
                 Next
               </button>
+              {acertou ? (<h4>Congratulations, keep doing well!!!</h4>):(<h4>It wasn't this time, but don't give up!</h4>) }
             </div>
           )}
         </div>
