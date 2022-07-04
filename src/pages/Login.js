@@ -87,16 +87,18 @@ class Login extends React.Component {
             </label>
           </div>
           <div className="buttons-container">
-            <button
-              type="button"
-              className="Login-play"
-              data-testid="btn-play"
-              disabled={ isDisable }
-              onClick={ () => this.submitForm() }
-            >
-              Play
-            </button>
-            <div className='footer-1'>
+            <div className="footer">
+              <button
+                type="button"
+                className="Login-play"
+                data-testid="btn-play"
+                disabled={ isDisable }
+                onClick={ () => this.submitForm() }
+              >
+                Play
+              </button>
+            </div>
+            <div className="footer-1">
               <button
                 type="button"
                 data-testid="btn-settings"
@@ -107,7 +109,7 @@ class Login extends React.Component {
             </div>
           </div>
         </form>
-      </id>
+      </div>
     );
   }
 }
