@@ -1,62 +1,40 @@
 body {
-
-    padding: 0;
-
-    margin: 0;
-
-    background-color: #7173b9;
-
+  background-color: #7173b9;
+  margin: 0;
+  padding: 0;
 }
+
 #login {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    height: 100vh;
-
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
 }
+
 .card {
-
-    background-color: rgba(19, 19, 19, 0.3);
-
-    padding: 40px;
-
-    border-radius: 2px;
-
-    width:280px;
-
+  background-color: rgba(19, 19, 19, 0.3);
+  border-radius: 2px;
+  padding: 40px;
+  width: 280px;
 }
+
 .card-header {
-
-    padding-bottom: 50px;
-
-    opacity: 0.8;
-
-    color: #fff;
-
+  color: white;
+  opacity: 0.8;
+  padding-bottom: 50px;
 }
+
 .card-header::after {
-
-    content: "";
-
-    width: 70px;
-
-    height: 1px;
-
-    background-color: #fff;
-
-    display: block;
-
-    margin-top: -17px;
-
-    margin-left: -5px;
-
+  background-color: #fff;
+  content: "";
+  display: block;
+  height: 1px;
+  margin-top: -17px;
+  margin-left: -5px;
+  width: 70px;
 }
+
 .card-content label {
 
     color: #fff;
@@ -66,15 +44,16 @@ body {
     opacity: 0.8;
 
 }
+
 .card-content-area input {
 
     margin-top: 10px;
 
-    padding:0 5px;
+    padding: 0 5px;
 
     background-color: transparent;
 
-    border:none;
+    border: none;
 
     border-bottom: 1px solid #e1e1e1;
 
@@ -83,7 +62,8 @@ body {
     color: #fff;
 
 }
-.footer{
+
+.footer {
 
     display: flex;
 
@@ -94,6 +74,7 @@ body {
     margin-top: 30px;
 
 }
+
 .footer-1 {
 
     display: flex;
