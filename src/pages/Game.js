@@ -32,16 +32,18 @@ class Game extends React.Component {
   };
 
   componentDidUpdate = () => {
-    const { questionIndex, answer, acertou } = this.state;
+    const { questionIndex, answer } = this.state;
     const { seconds, updateScore, questions } = this.props;
     if (answer === 'correct') {
-      this.setState({acertou: true})
+      this.acertou();
       const { difficulty } = questions[questionIndex];
       const points = BASE_POINTS + seconds * DIFFICULTY_POINTS[difficulty];
       this.changeAnswerState();
       updateScore(points);
     }
   };
+
+  acertou = () => { this.setState({ acertou: true }); }
 
   componentWillUnmount = () => {
     this.setState({
@@ -200,7 +202,8 @@ class Game extends React.Component {
               >
                 Next
               </button>
-              {acertou ? (<h4>Congratulations, keep doing well!!!</h4>):(<h4>It wasn't this time, but don't give up!</h4>) }
+              {acertou ? (<h4>Congratulations, keep doing well!!!</h4>)
+                : (<h4>It wasn&#39;t this time, but don&#39;t give up!</h4>)}
             </div>
           )}
         </div>
