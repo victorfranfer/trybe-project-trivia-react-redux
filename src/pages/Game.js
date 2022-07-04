@@ -188,22 +188,25 @@ class Game extends React.Component {
     return (
       <main>
         <Header />
-        <Timer stopTimer={ stopTimer } reset={ reset } />
-        <h3 data-testid="question-category">{`Categoria - ${category}`}</h3>
-        <h4 data-testid="question-text">{this.decodeEntity(question)}</h4>
-        {this.sectionType(questions[questionIndex])}
-        {nextDisable && (
-          <div>
-            <button
-              type="button"
-              data-testid="btn-next"
-              onClick={ () => this.nextQuestion() }
-            >
-              Next
-            </button>
-          </div>
-        )}
-
+        <div className="container">
+          <Timer stopTimer={ stopTimer } reset={ reset } />
+          <h3 data-testid="question-category">{category}</h3>
+          <h4 data-testid="question-text">{this.decodeEntity(question)}</h4>
+          {this.sectionType(questions[questionIndex])}
+          {nextDisable && (
+            <div>
+              <button
+                type="button"
+                data-testid="btn-next"
+                onClick={ () => this.nextQuestion() }
+              >
+                Next
+              </button>
+              {acertou ? (<h4>Congratulations, keep doing well!!!</h4>)
+                : (<h4>It wasn&#39;t this time, but don&#39;t give up!</h4>)}
+            </div>
+          )}
+        </div>
       </main>
     );
   }
