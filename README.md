@@ -1,4 +1,4 @@
-# :construction: README customizado em construção ! :construction:
+# Trivia React Redux - Trybe Project
 <!-- Olá, Tryber!
 Esse é apenas um arquivo inicial para o README do seu projeto no qual você pode customizar e reutilizar todas as vezes que for executar o trybe-publisher.
 
@@ -11,3 +11,6 @@ Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua cr
 - quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
 - quais arquivos/pastas foram desenvolvidos pela Trybe.
 -->
+Group project in which we built a Trivia game using React Redux. There is a login page, then we render random questions and save the scores in a ranking.
+
+Done in July 2022. 
